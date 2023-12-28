@@ -23,6 +23,8 @@
 
     ( suspicious ?s - suitcase )
 
+    ( no_suspicious ?s - suitcase )
+
     ( ocupation ?w - wagon  ?c  - capacity )
     
     ( conection ?p1 - place ?p2 - place )
@@ -34,9 +36,10 @@
     ( min-ocupation ?c - capacity )
 
     ( inspection ?i - place )
+
     ( retrieve ?r - place )
 
-    ; anyadir oficina de inspección, recogida de equipajes
+    ( no_retrieve ?nr - place )
 
 )
 
@@ -60,7 +63,6 @@
         ?machine - machine
         ?place - place
         ?capacity ?min_capacity - capacity
-
         ;?maxc - capacity
     )
     :precondition (and 
@@ -109,32 +111,109 @@
 
 (:action inspect
     :parameters (
-        ?wagon - wagon
+        ?suitcase - suitcase
         ?place - place
     )
     :precondition (and 
-        (at ?wagon ?place)
+        ( at ?suitcase ?place )
         ( inspection ?place )
+        ( suspicious ?suitcase )
     )
-    :effect (and )
+    :effect (and
+        ( not ( suspicious ?suitcase ) ) 
+        ( no_suspicious ?suitcase )
+    )
 )
+
 
 (:action load
     :parameters (
         ?wagon - wagon
         ?machine - machine
-        ?ocupation - capacity
+        ?suitcase - suitcase
+        ?place - place
+        ?c_current ?c_next - capacity
     )
-    :precondition (and )
-    :effect (and )
+    :precondition ( and 
+        ( at ?machine ?place )
+        ( intrain ?wagon ?machine )
+        ( at ?suitcase ?place )
+
+        ( ocupation ?wagon  ?c_current )
+        ( capacity_order ?c_current ?c_next )
+    )
+    :effect (and 
+        ; update suitcase location
+        ( not ( at ?suitcase ?place ) )
+        ( in ?suitcase ?wagon )
+
+        ; update ocupation
+        ( not (ocupation ?wagon  ?c_current) )
+        ( ocupation ?wagon  ?c_next )
+
+    )
 )
 
 (:action unload
-    :parameters ()
-    :precondition (and )
-    :effect (and )
+    :parameters (
+        ?wagon - wagon
+        ?machine - machine
+        ?suitcase - suitcase
+        ?place - place
+        ?c_current ?c_prev - capacity
+    )
+    :precondition (and
+        ( no_retrieve ?place )
+        ; ( not ( retrieve ?place ) )
+        ( at ?machine ?place )
+        ( intrain ?wagon ?machine )
+        ( in ?suitcase ?wagon )
+        
+        ( ocupation ?wagon  ?c_current )
+        ( capacity_order ?c_prev ?c_current )
+    )
+    :effect (and 
+        ; update suitcase location
+        ( not ( in ?suitcase ?wagon ) )
+        ( at ?suitcase ?place )
+
+        ; update ocupation
+        ( not (ocupation ?wagon  ?c_current) )
+        ( ocupation ?wagon ?c_prev )
+    )
 )
 
+
+(:action deliver
+    :parameters (
+        ?wagon - wagon
+        ?machine - machine
+        ?suitcase - suitcase
+        ?place - place
+        ?c_current ?c_prev - capacity
+        )
+    :precondition (and 
+        ( retrieve ?place )
+
+        ( at ?machine ?place )
+        ( intrain ?wagon ?machine )
+        ( in ?suitcase ?wagon )
+        ( no_suspicious ?suitcase)
+
+        ( ocupation ?wagon  ?c_current )
+        ( capacity_order ?c_prev ?c_current )
+        
+    )
+    :effect (and 
+        ; update suitcase location
+        ( not ( in ?suitcase ?wagon ) )
+        ( at ?suitcase ?place )
+
+        ; update ocupation
+        ( not (ocupation ?wagon  ?c_current) )
+        ( ocupation ?wagon ?c_prev )
+    )
+)
 
 
 
