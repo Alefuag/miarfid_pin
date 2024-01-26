@@ -39,11 +39,13 @@ gamma = 0.995 # Discount factor; default: 0.99
 # Entrenamos hasta un numero maximo de episodios (reinicios)
 for episode in tqdm(range(total_episodes)):
     state, debug = env.reset()
-    # El agente ira tomando decisiones hasta un n´umero m´aximo de pasos
+    # El agente ira tomando decisiones hasta un numero maximo de pasos
     for step in range(max_steps):
         if random.uniform(0,1) > epsilon:
             # EXPLOTACION
-            act_idx = np.argmax(qtable[state])
+            valid_actions_idx = [a in env.action_space.all_ground_literals(state) for a in all_actions]
+            act_idx = np.argmax( np.where(qtable[state], valid_actions_idx, 0) )
+            # print( valid_actions_idx )
             action = reversed_action_index[act_idx]
         else:
             # EXPLORACION
