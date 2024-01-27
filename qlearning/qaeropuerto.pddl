@@ -21,7 +21,7 @@
 
         ( intrain_ ?m - machine)
 
-        ( capacity_order ?l - capacity ?u - capacity)
+        ;( capacity_order ?l - capacity ?u - capacity)
 
         ( suspicious ?s - suitcase)
 
@@ -37,7 +37,7 @@
 
         ;( max-ocupation ?c - capacity )
 
-        ( min-ocupation ?c - capacity)
+        ;( min-ocupation ?c - capacity)
 
         ( inspection ?i - place)
 
@@ -56,12 +56,12 @@
             ( conection ?place1 ?place2)
         )
         :effect (and
-            (not (at ?machine ?place1))
+            ( not (at ?machine ?place1))
             ( at ?machine ?place2)
         )
     )
 
-    (:action attach
+    (:action attach_to_wagon
         :parameters ( ?wagon - wagon ?tail - wagon ?machine - machine ?place - place 
             ;?min_capacity - capacity
         )
@@ -83,7 +83,7 @@
         )
     )
 
-    (:action attach_to_empty
+    (:action attach_to_machine
         :parameters ( ?wagon - wagon
             ?machine - machine 
             ?place - place 
@@ -101,8 +101,8 @@
 
         )
         :effect (and
-            (not ( at ?wagon ?place))
-            (not ( last_ ?machine))
+            ( not ( at ?wagon ?place) )
+            ( not ( last_ ?machine) )
             ( last ?wagon ?machine)
             ( head_attached ?wagon ?machine)
             ( intrain ?wagon ?machine)
@@ -191,10 +191,12 @@
 
     (:action unload
         :parameters ( ?wagon - wagon ?machine - machine ?suitcase - suitcase ?place - place 
-        ;?c_current - capacity ?c_prev - capacity
+            ;?c_current - capacity
+            ;?c_prev - capacity
         )
         :precondition (and
             ( no_retrieve ?place)
+
             ( at ?machine ?place)
             ( intrain ?wagon ?machine)
             ( in ?suitcase ?wagon)
@@ -224,6 +226,7 @@
             ( intrain ?wagon ?machine)
             ( in ?suitcase ?wagon)
             ( no_suspicious ?suitcase)
+            
             ;( ocupation ?wagon  ?c_current )
             ;( capacity_order ?c_prev ?c_current ))
             (not ( empty ?wagon))
