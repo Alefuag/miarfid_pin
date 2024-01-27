@@ -40,9 +40,7 @@
         
     )
     (:goal 
-        ( at s1 p_ret )      
+        ( at s1 p_ret )
     )
 
-    ;un-comment the following line if metric is needed
-    ;(:metric minimize (???))
 )

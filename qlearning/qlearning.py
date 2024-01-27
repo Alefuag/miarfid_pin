@@ -75,4 +75,6 @@ def qlearning_experiment(
 
     return plan
 
-
+if __name__ == "__main__":
+    plan = qlearning_experiment()
+    print(plan)
