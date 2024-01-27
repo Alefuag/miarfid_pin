@@ -56,14 +56,17 @@
             ( conection ?place1 ?place2)
         )
         :effect (and
-            ( not (at ?machine ?place1))
+            ( not ( at ?machine ?place1))
             ( at ?machine ?place2)
         )
     )
 
     (:action attach_to_wagon
-        :parameters ( ?wagon - wagon ?tail - wagon ?machine - machine ?place - place 
-            ;?min_capacity - capacity
+        :parameters (
+            ?wagon - wagon
+            ?tail - wagon
+            ?machine - machine
+            ?place - place 
         )
         :precondition (and
             ( last ?tail ?machine)
@@ -75,8 +78,8 @@
             ( empty ?wagon)
         )
         :effect (and
-            (not ( at ?wagon ?place))
-            (not ( last ?tail ?machine))
+            ( not ( at ?wagon ?place))
+            ( not ( last ?tail ?machine))
             ( last ?wagon ?machine)
             ( attached ?wagon ?tail)
             ( intrain ?wagon ?machine)
@@ -101,8 +104,8 @@
 
         )
         :effect (and
-            ( not ( at ?wagon ?place) )
-            ( not ( last_ ?machine) )
+            ( not ( at ?wagon ?place))
+            ( not ( last_ ?machine))
             ( last ?wagon ?machine)
             ( head_attached ?wagon ?machine)
             ( intrain ?wagon ?machine)
@@ -122,9 +125,9 @@
             ( empty ?tail)
         )
         :effect (and
-            (not ( intrain ?tail ?machine))
-            (not ( attached ?tail ?newtail))
-            (not ( last ?tail ?machine))
+            ( not ( intrain ?tail ?machine))
+            ( not ( attached ?tail ?newtail))
+            ( not ( last ?tail ?machine))
             ( last ?newtail ?machine)
             ( at ?tail ?place)
         )
@@ -145,9 +148,9 @@
             ( empty ?tail)
         )
         :effect (and
-            (not( intrain ?tail ?machine))
-            (not( head_attached ?tail ?machine))
-            (not ( last ?tail ?machine))
+            ( not ( intrain ?tail ?machine))
+            ( not ( head_attached ?tail ?machine))
+            ( not ( last ?tail ?machine))
             ( at ?tail ?place)
             ( last_ ?machine)
         )
@@ -162,7 +165,7 @@
             ( suspicious ?suitcase)
         )
         :effect (and
-            (not ( suspicious ?suitcase))
+            ( not ( suspicious ?suitcase))
             ( no_suspicious ?suitcase)
         )
     )
@@ -181,9 +184,9 @@
             ( empty ?wagon)
         )
         :effect (and
-            (not ( at ?suitcase ?place))
+            ( not ( at ?suitcase ?place))
             ( in ?suitcase ?wagon)
-            (not ( empty ?wagon))
+            ( not ( empty ?wagon))
             ;(not (ocupation ?wagon  ?c_current))
             ;( ocupation ?wagon  ?c_next )
         )
@@ -203,10 +206,10 @@
 
             ;( ocupation ?wagon ?c_current)
             ;( capacity_order ?c_prev ?c_current)
-            (not ( empty ?wagon))
+            ( not ( empty ?wagon))
         )
         :effect (and
-            (not ( in ?suitcase ?wagon))
+            ( not ( in ?suitcase ?wagon))
             ( at ?suitcase ?place)
             ;(not (ocupation ?wagon ?c_current))
             ;( ocupation ?wagon ?c_prev)
@@ -226,13 +229,10 @@
             ( intrain ?wagon ?machine)
             ( in ?suitcase ?wagon)
             ( no_suspicious ?suitcase)
-            
-            ;( ocupation ?wagon  ?c_current )
-            ;( capacity_order ?c_prev ?c_current ))
-            (not ( empty ?wagon))
+            ( not ( empty ?wagon))
         )
         :effect (and
-            (not ( in ?suitcase ?wagon))
+            ( not ( in ?suitcase ?wagon))
             ( at ?suitcase ?place)
             ;(not (ocupation ?wagon  ?c_current))
             ;( ocupation ?wagon ?c_prev ))
@@ -240,4 +240,4 @@
         )
 
     )
-)
+)   
