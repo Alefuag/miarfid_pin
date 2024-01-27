@@ -33,7 +33,7 @@
         ( intrain_ m1)
         ( last_ m1)
         
-        ( at m1 p5)
+        ( at m2 p5)
         ( intrain_ m2)
         ( last_ m2)
 
@@ -43,11 +43,8 @@
         ( at w2 p6)
         ( empty w2)
 
-        ( at w2 p6)
-        ( empty w2)
-
         ( at w3 p_fac)
-        ( empty w2)
+        ( empty w3)
 
         ( at s1 p2)
         ( suspicious s1)

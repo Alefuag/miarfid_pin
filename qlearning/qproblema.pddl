@@ -35,6 +35,10 @@
         
         ( at w1 p1)
         ( empty w1)
+
+        ( at w2 p6)
+        ( empty w2)
+
         ( at s1 p2)
         ( suspicious s1)
         
