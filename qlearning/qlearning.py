@@ -13,6 +13,7 @@ def qlearning_experiment(
     learning_rate = 0.2, # Alpha in Q-learning algorithm
     epsilon = 0.99, #0.01
     gamma = 0.995, # Discount factor; default: 0.99
+    decay = 0.99 # Decay rate for epsilon; default: 0.99995
     ):
     
     # INICIALIZACION DE PARAMETROS
@@ -56,7 +57,7 @@ def qlearning_experiment(
             state = new_state
             if done:
                 break
-        epsilon *= gamma
+        epsilon *= decay
 
     # print(qtable)
 
