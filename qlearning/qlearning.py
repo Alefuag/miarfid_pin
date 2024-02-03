@@ -29,9 +29,9 @@ def qlearning_experiment(
 
     all_actions = env.action_space._all_ground_literals
     num_actions = len(all_actions)
+    qtable = defaultdict(lambda: np.zeros(num_actions))
     action_index = { v:k for k, v in enumerate(all_actions) }
     reversed_action_index = { v:k for k, v in action_index.items() }
-    qtable = defaultdict(lambda: np.zeros(num_actions))
 
     # ALGORITMO Q-LEARNING
     # Entrenamos hasta un numero maximo de episodios (reinicios)

@@ -105,6 +105,7 @@
         ( not ( intrain ?tail ?machine ) )
         ( not ( attached ?tail ?newtail ) )
         ( not ( last ?tail ?machine ) )
+        ( last ?newtail ?machine )
         ( at ?tail ?place )
     )
 )

@@ -27,7 +27,7 @@
 
         ( no_suspicious ?s - suitcase)
 
-        ( ocupation ?w - wagon ?c - capacity)
+        ;( ocupation ?w - wagon ?c - capacity)
 
         ( conection ?p1 - place ?p2 - place)
 
