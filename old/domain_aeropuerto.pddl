@@ -62,7 +62,7 @@
         ?tail - ( either wagon machine)
         ?machine - machine
         ?place - place
-        ?capacity ?min_capacity - capacity
+        ?capacity - capacity
         ;?maxc - capacity
     )
     :precondition (and 
@@ -72,9 +72,7 @@
         ( at ?wagon ?place )
         ( at ?machine ?place )
         ( ocupation ?wagon  ?capacity )
-        ( min-ocupation ?min_capacity )
-        ;( = ?c c0)
-        
+        ( min-ocupation ?capacity )
     )
     :effect (and 
         ( not ( at ?wagon ?place ) )
@@ -91,7 +89,7 @@
         ?newtail - (either wagon machine)
         ?machine - machine
         ?place - place
-        ?capacity ?min_capacity - capacity
+        ?capacity - capacity
     )
     :precondition ( and
         ( at ?machine ?place)
@@ -99,7 +97,7 @@
         ( last ?tail ?machine )
         ( attached ?tail ?newtail )
         ( ocupation ?tail ?capacity )
-        ( min-ocupation ?min_capacity )
+        ( min-ocupation ?capacity )
     )
     :effect ( and
         ( not ( intrain ?tail ?machine ) )
